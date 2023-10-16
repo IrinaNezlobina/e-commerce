@@ -4,6 +4,7 @@
 <!--</pre>-->
   <div class="catalog content">
     <el-card class="catalog__item" :body-style="{ padding: '0px' }">
+
         <router-link
             :to="linkOpen" class="catalog__img">
           <img :src="item.image" />

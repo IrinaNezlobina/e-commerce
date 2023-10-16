@@ -1,0 +1,100 @@
+<template>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <div class="header__logo">
+
+        </div>
+        <div class="header__search">
+
+        </div>
+<!--        <nav>-->
+<!--          <RouterLink to="/">Home</RouterLink>-->
+<!--          <RouterLink to="/products">Products</RouterLink>-->
+<!--        </nav>-->
+        <div class="header__right">
+          <div class="favorite">
+
+          </div>
+          <div class="cart">
+            <ShoppingCart />
+            <div class="cart__counter">1</div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </header>
+</template>
+
+<script>
+export default {
+  name: "TheHeader"
+}
+</script>
+
+<style scoped lang="scss">
+.header {
+  padding: 20px 0;
+  background: rgba(1, 99, 103, 0.1);
+}
+.cart__counter {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+  border-radius: 50%;
+  color: white;
+  background: #016367;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: -5px;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart {
+  position: relative;
+  svg {
+    color: #016367;
+    width: 30px ;
+    height: 30px;
+  }
+}
+header {
+  line-height: 1.5;
+  max-height: 100vh;
+}
+
+nav {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+</style>
