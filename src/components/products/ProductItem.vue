@@ -20,7 +20,7 @@
                 disabled
                 show-score
                 text-color="#ff9900"
-                score-template="Rate"
+                score-template=""
             />
             <div class="catalog__item-rating">
               {{ rating }}
@@ -56,6 +56,7 @@ export default {
 <style lang="scss">
 .catalog__item {
   padding: 20px;
+  border-radius: 20px;
   //@include ratio(100, 100);
   box-shadow: 0 5px 22px rgba(0,0,0,.1);
   display: flex;
@@ -63,7 +64,7 @@ export default {
   height: 100%;
   transition: .4s;
   &:hover {
-    box-shadow: 0 1px 8px #016367;
+    box-shadow: 0 1px 8px #F8BBD0 ;
   }
   .el-card__body {
     display: flex;

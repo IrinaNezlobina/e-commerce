@@ -25,6 +25,7 @@
         score-template=""
     />
 <!--{{ product.rating.rate}}-->
+    <button @click=""  class="btn btn-cart">Add to cart</button>
   </div>
   </div>
 </template>

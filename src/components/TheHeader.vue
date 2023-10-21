@@ -3,11 +3,9 @@
     <div class="container">
       <div class="header__inner">
         <div class="header__logo">
-
+          <img src="../assets/images/logo.jpg" alt="">
         </div>
-        <div class="header__search">
-
-        </div>
+       <Search :search="getSearch" />
 <!--        <nav>-->
 <!--          <RouterLink to="/">Home</RouterLink>-->
 <!--          <RouterLink to="/products">Products</RouterLink>-->
@@ -32,15 +30,32 @@
 </template>
 
 <script>
+import Search from "@/components/Search";
 export default {
-  name: "TheHeader"
+  name: "TheHeader",
+  components: {Search},
+  data() {
+    return {
+      // valueSearch: '',
+      searchResult:[]
+    }
+  },
+  methods: {
+
+  },
+  props: ['search'],
 }
 </script>
 
 <style scoped lang="scss">
 .header {
-  padding: 20px 0;
-  background: rgba(1, 99, 103, 0.1);
+  padding: 10px 0;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 5px #F8BBD0;
+  //background: rgba(1, 99, 103, 0.1);
+}
+.header__logo {
+  max-width: 80px;
 }
 .cart__counter {
   position: absolute;

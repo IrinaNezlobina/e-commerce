@@ -1,8 +1,11 @@
 <template>
-<TheHeader/>
+<TheHeader :search="getSearch" />
 
   <main>
-    <RouterView />
+    <div class="container">
+      <RouterView />
+    </div>
+
   </main>
 </template>
 
@@ -16,7 +19,14 @@ export default {
       str: '123',
     }
   },
-  methods: {},
+  methods: {
+    getSearch(val)
+    {
+
+      this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
+
+    }
+  },
   computed() {},
   components: {
     RouterLink,
