@@ -1,13 +1,10 @@
 <template>
   <div class="product">
-
 <!--{{ product.rating.rate}}-->
     <div class="product__item">
       <div class="product__image">
         <img :src="product.image"/>
       </div>
-
-
     </div>
     <div v-if="loading">Идет загрузка ...</div>
 
@@ -25,16 +22,26 @@
         score-template=""
     />
 <!--{{ product.rating.rate}}-->
-    <button @click=""  class="btn btn-cart">Add to cart</button>
+    <button @click="cartStore.addProduct(product)"  class="btn btn-cart">Add to cart</button>
   </div>
   </div>
 </template>
 
 <script>
-import {getProduct} from '@/api/products';
+import { getProduct } from '@/api/products';
+import { useCartStore } from '@/stores/CartStore';
 
 export default {
   name: "ProductElement",
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       product: {},
@@ -42,6 +49,7 @@ export default {
       rating: null
     }
   },
+
   methods: {
     async getData() {
       this.loading = true;
@@ -62,6 +70,7 @@ export default {
       }
     }
   },
+
   mounted() {
     this.getData();
     // this.rating = this.product.rating.rate;

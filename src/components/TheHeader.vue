@@ -3,7 +3,14 @@
     <div class="container">
       <div class="header__inner">
         <div class="header__logo">
-          <img src="../assets/images/logo.jpg" alt="">
+          <router-link to="/">
+            <img src="../assets/images/logo.jpg" alt="">
+          </router-link>
+        </div>
+        <div class="header__menu">
+          <router-link to="/products">
+            Products
+          </router-link>
         </div>
        <Search :search="getSearch" />
 <!--        <nav>-->
@@ -15,35 +22,48 @@
 
           </div>
           <div class="cart">
-            <ShoppingCart />
-            <div class="cart__counter">1</div>
+            <router-link to="/cart">
+              <ShoppingCart />
+              <div v-if="cartStore.countProducts" class="cart__counter">
+                {{ cartStore.countProducts }}
+              </div>
+            </router-link>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
-
   </header>
 </template>
 
 <script>
+import { useCartStore } from '../stores/CartStore';
 import Search from "@/components/Search";
+
 export default {
   name: "TheHeader",
-  components: {Search},
+
+  props: ['search'],
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       // valueSearch: '',
       searchResult:[]
     }
   },
+
   methods: {
 
   },
-  props: ['search'],
+
+  components: {Search},
 }
 </script>
 
@@ -111,5 +131,9 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+a {
+  color: #000000 !important;
 }
 </style>

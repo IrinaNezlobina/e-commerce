@@ -4,7 +4,6 @@
 <!--</pre>-->
   <div class="catalog content">
     <el-card class="catalog__item" :body-style="{ padding: '0px' }">
-
         <router-link
             :to="linkOpen" class="catalog__img">
           <img :src="item.image" />
@@ -25,30 +24,45 @@
             <div class="catalog__item-rating">
               {{ rating }}
             </div>
-            <button @click=""  class="btn btn-cart">Add to cart</button>
+            <button @click="cartStore.addProduct(item)"  class="btn btn-cart">Add to cart</button>
           </div>
       </el-card>
   </div>
 </template>
 
 <script>
+import { useCartStore } from '@/stores/CartStore';
+
 export default {
   name: 'ProductItem',
+
   props: ['item'],
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       cartItems : [],
       rating: null,
     }
   },
+
   mounted() {
     this.rating = this.item.rating.rate;
   },
+
   computed: {
     linkOpen() {
       return `/products/${this.item.id}`;
     },
   },
+
   components: {},
 }
 </script>

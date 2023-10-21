@@ -17,9 +17,10 @@
 </template>
 
 <script>
-import {getProducts} from '@/api/products';
+import { getProducts } from '@/api/products';
 import ProductItem from "@/components/products/ProductItem.vue";
 import Search from "@/components/Search";
+
 export default {
   name: 'ProductView',
 
@@ -28,10 +29,9 @@ export default {
       data: [],
       loading: true,
       searchResult:[]
-
-
     }
   },
+
   methods: {
     async getData() {
       this.loading = true;
@@ -46,21 +46,21 @@ export default {
         this.loading = false;
       }
     },
-    getSearch(val)
-    {
 
+    getSearch(val) {
       this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
+    },
+  },
 
-    }
+  computed() {},
+
+  mounted() {
+    this.getData();
   },
-  computed() {
-  },
+
   components: {
     ProductItem,
     Search
-  },
-  mounted() {
-    this.getData();
   },
 }
 </script>
