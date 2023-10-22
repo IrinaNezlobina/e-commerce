@@ -3,37 +3,49 @@
     <div class="container">
       <div class="header__inner">
         <div class="header__logo">
-          <img src="../assets/images/logo.jpg" alt="">
+          <router-link to="/">
+            <img src="../assets/images/logo.jpg" alt="">
+          </router-link>
         </div>
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/products">Products</RouterLink>
+        </nav>
        <Search :search="getSearch" />
-<!--        <nav>-->
-<!--          <RouterLink to="/">Home</RouterLink>-->
-<!--          <RouterLink to="/products">Products</RouterLink>-->
-<!--        </nav>-->
         <div class="header__right">
           <div class="favorite">
-
           </div>
           <div class="cart">
-            <ShoppingCart />
-            <div class="cart__counter">1</div>
+            <router-link to="/cart">
+              <ShoppingCart />
+              <div v-if="cartStore.countProducts" class="cart__counter">
+                {{ cartStore.countProducts }}
+              </div>
+            </router-link>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
-
   </header>
 </template>
 
 <script>
 import Search from "@/components/Search";
+import { useCartStore } from "@/stores/CartStore";
+
 export default {
   name: "TheHeader",
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   components: {Search},
+
   data() {
     return {
       // valueSearch: '',
@@ -41,7 +53,9 @@ export default {
     }
   },
   methods: {
+    getSearch() {
 
+    },
   },
   props: ['search'],
 }
@@ -96,7 +110,8 @@ nav {
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  //color: var(--color-text);
+  text-decoration: underline;
 }
 
 nav a.router-link-exact-active:hover {
@@ -105,6 +120,7 @@ nav a.router-link-exact-active:hover {
 
 nav a {
   display: inline-block;
+  color: #252525;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }

@@ -24,17 +24,26 @@
         text-color="#ff9900"
         score-template=""
     />
-<!--{{ product.rating.rate}}-->
-    <button @click=""  class="btn btn-cart">Add to cart</button>
+    <button @click="cartStore.addProduct(product)"  class="btn btn-cart">Add to cart</button>
   </div>
   </div>
 </template>
 
 <script>
 import {getProduct} from '@/api/products';
+import {useCartStore} from "@/stores/CartStore";
 
 export default {
   name: "ProductElement",
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       product: {},
@@ -42,6 +51,7 @@ export default {
       rating: null
     }
   },
+
   methods: {
     async getData() {
       this.loading = true;
@@ -52,6 +62,8 @@ export default {
         const res = await getProduct(id);
         if (res) {
           this.product = res;
+          console.log(res);
+          this.rating = res.rating.rate;
         } else {
           this.$router.push({name: 'notFound'});
         }
@@ -62,9 +74,9 @@ export default {
       }
     }
   },
+
   mounted() {
     this.getData();
-    // this.rating = this.product.rating.rate;
   },
 }
 </script>

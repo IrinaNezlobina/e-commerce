@@ -25,16 +25,28 @@
             <div class="catalog__item-rating">
               {{ rating }}
             </div>
-            <button @click=""  class="btn btn-cart">Add to cart</button>
+            <button @click="cartStore.addProduct(item)"  class="btn btn-cart">Add to cart</button>
           </div>
       </el-card>
   </div>
 </template>
 
 <script>
+import { useCartStore } from "@/stores/CartStore";
+
 export default {
   name: 'ProductItem',
+
   props: ['item'],
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       cartItems : [],
@@ -54,6 +66,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/base/mixins.scss";
+
 .catalog__item {
   padding: 20px;
   border-radius: 20px;
@@ -71,8 +85,8 @@ export default {
     flex-direction: column;
     height: 100%;
   }
-
 }
+
 .catalog__img {
   padding-bottom: 100%;
   display: block;
@@ -80,12 +94,13 @@ export default {
   overflow: hidden;
   position: relative;
   margin-bottom: 10px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-  }
+  @include ratio(333,334);
+  //img {
+  //  width: 100%;
+  //  height: 100%;
+  //  object-fit: contain;
+  //  position: absolute;
+  //}
 }
 .catalog__item-price {
   font-size: 20px;
