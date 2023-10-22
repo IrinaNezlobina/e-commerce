@@ -1,65 +1,42 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/products">Products</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+<TheHeader :search="getSearch" />
   <main>
-    <RouterView />
+    <div class="container">
+      <RouterView />
+    </div>
   </main>
 </template>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
+import TheHeader from "@/components/TheHeader";
 
 export default {
   name: 'App',
+
+  setup() {},
+
   data() {
     return {
       str: '123',
     }
   },
-  methods: {},
+
+  methods: {
+    getSearch(val) {
+      this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
+    },
+  },
+
   computed() {},
+
   components: {
-    RouterLink,
     RouterView,
+    TheHeader
   },
 }
 </script>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 16px;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
 </style>

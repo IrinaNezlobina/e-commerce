@@ -4,6 +4,7 @@
 <!--</pre>-->
   <div class="catalog content">
     <el-card class="catalog__item" :body-style="{ padding: '0px' }">
+
         <router-link
             :to="linkOpen" class="catalog__img">
           <img :src="item.image" />
@@ -19,21 +20,33 @@
                 disabled
                 show-score
                 text-color="#ff9900"
-                score-template="Rate"
+                score-template=""
             />
             <div class="catalog__item-rating">
               {{ rating }}
             </div>
-            <button @click=""  class="btn btn-cart">Add to cart</button>
+            <button @click="cartStore.addProduct(item)"  class="btn btn-cart">Add to cart</button>
           </div>
       </el-card>
   </div>
 </template>
 
 <script>
+import { useCartStore } from "@/stores/CartStore";
+
 export default {
   name: 'ProductItem',
+
   props: ['item'],
+
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    }
+  },
+
   data() {
     return {
       cartItems : [],
@@ -53,8 +66,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/base/mixins.scss";
+
 .catalog__item {
   padding: 20px;
+  border-radius: 20px;
   //@include ratio(100, 100);
   box-shadow: 0 5px 22px rgba(0,0,0,.1);
   display: flex;
@@ -62,15 +78,15 @@ export default {
   height: 100%;
   transition: .4s;
   &:hover {
-    box-shadow: 0 1px 8px #016367;
+    box-shadow: 0 1px 8px #F8BBD0 ;
   }
   .el-card__body {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
-
 }
+
 .catalog__img {
   padding-bottom: 100%;
   display: block;
@@ -78,12 +94,13 @@ export default {
   overflow: hidden;
   position: relative;
   margin-bottom: 10px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-  }
+  @include ratio(333,334);
+  //img {
+  //  width: 100%;
+  //  height: 100%;
+  //  object-fit: contain;
+  //  position: absolute;
+  //}
 }
 .catalog__item-price {
   font-size: 20px;

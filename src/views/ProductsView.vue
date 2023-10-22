@@ -1,10 +1,13 @@
 <template>
   <div class="content">
+    <Search :search="getSearch" />
     <el-space :size="size" :spacer="spacer">
       <div v-for="i in 2" :key="i">
-        <el-button> button {{ i }} </el-button>
+        <button class="btn"> button {{ i }} </button>
       </div>
+
     </el-space>
+    <div :data="searchResult" ></div>
     <div v-if="data.length" class="products catalog__list">
       <product-item v-for="(item, index) in data" :key="index" :item="item"></product-item>
     </div>
@@ -16,13 +19,16 @@
 <script>
 import {getProducts} from '@/api/products';
 import ProductItem from "@/components/products/ProductItem.vue";
+import Search from "@/components/Search";
 
 export default {
   name: 'ProductView',
+
   data() {
     return {
       data: [],
       loading: true,
+      searchResult:[]
     }
   },
   methods: {
@@ -38,12 +44,17 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+
+    getSearch(val) {
+      this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
     }
   },
   computed() {
   },
   components: {
     ProductItem,
+    Search
   },
   mounted() {
     this.getData();
