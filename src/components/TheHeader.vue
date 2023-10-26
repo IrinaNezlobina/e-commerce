@@ -4,20 +4,20 @@
       <div class="header__inner">
         <div class="header__logo">
           <router-link to="/">
-            <img src="../assets/images/logo.jpg" alt="">
+            <img alt="" src="../assets/images/logo.jpg">
           </router-link>
         </div>
         <nav>
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/products">Products</RouterLink>
         </nav>
-       <Search :search="getSearch" />
+        <Search/>
         <div class="header__right">
           <div class="favorite">
           </div>
           <div class="cart">
             <router-link to="/cart">
-              <ShoppingCart />
+              <ShoppingCart/>
               <div v-if="cartStore.countProducts" class="cart__counter">
                 {{ cartStore.countProducts }}
               </div>
@@ -31,11 +31,11 @@
 
 <script>
 import Search from "@/components/Search";
-import { useCartStore } from "@/stores/CartStore";
+import {useCartStore} from "@/stores/CartStore";
 
 export default {
   name: "TheHeader",
-
+  props: ['search'],
   setup() {
     const cartStore = useCartStore();
 
@@ -44,33 +44,30 @@ export default {
     }
   },
 
-  components: {Search},
-
   data() {
-    return {
-      // valueSearch: '',
-      searchResult:[]
-    }
+    return {}
   },
-  methods: {
-    getSearch() {
 
-    },
-  },
-  props: ['search'],
+  methods: {},
+
+  components: {Search},
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import "@/styles/base/mixins.scss";
+
 .header {
   padding: 10px 0;
   margin-bottom: 10px;
   box-shadow: 0 1px 5px #F8BBD0;
   //background: rgba(1, 99, 103, 0.1);
 }
+
 .header__logo {
   max-width: 80px;
 }
+
 .cart__counter {
   position: absolute;
   width: 15px;
@@ -85,19 +82,27 @@ export default {
   top: 0;
   right: -5px;
 }
+
 .header__inner {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include breakpoint(lg) {
+    position: relative;
+  }
 }
+
 .cart {
   position: relative;
+
   svg {
     color: #016367;
-    width: 30px ;
+    width: 30px;
     height: 30px;
   }
 }
+
 header {
   line-height: 1.5;
   max-height: 100vh;
