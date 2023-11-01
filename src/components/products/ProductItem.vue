@@ -27,6 +27,7 @@
           {{ rating }}
         </div>
         <button class="btn btn-cart" @click="cartStore.addProduct(item)">Add to cart</button>
+        <button class="btn btn-cart" @click="favStore.addToFavorite(item)">Избранное</button>
       </div>
     </el-card>
   </div>
@@ -34,6 +35,7 @@
 
 <script>
 import {useCartStore} from "@/stores/CartStore";
+import {useFavStore} from "@/stores/FavoriteStore";
 
 export default {
   name: 'ProductItem',
@@ -42,8 +44,11 @@ export default {
 
   setup() {
     const cartStore = useCartStore();
+    const favStore = useFavStore();
+
     return {
       cartStore,
+      favStore
     }
   },
 

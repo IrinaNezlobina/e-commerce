@@ -5,7 +5,7 @@
         placeholder="Search"
         type="search"
         @input="change">
-    <div v-if="products.length" class="block">
+    <div v-if="products.length" :class="{'active':valueSearch}" class="block">
       <div
           v-for="product in products"
           class="block-item">
@@ -42,9 +42,11 @@ export default {
     // }, 500),
     change() {
       if (this.valueSearch) {
+        console.log(this.valueSearch);
         this.storeSearch.getSearch(this.valueSearch);
         document.body.style.overflow = 'hidden';
       } else {
+        console.log(777)
         document.body.style.overflow = 'auto';
       }
     },
@@ -73,6 +75,13 @@ export default {
   overflow-y: auto;
   max-height: calc(100vh - 85px);
   z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
 
   &-item {
     width: 30%;

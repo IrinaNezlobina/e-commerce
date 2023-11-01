@@ -14,6 +14,8 @@
         <Search/>
         <div class="header__right">
           <div class="favorite">
+            <router-link to="/favorite"> fav</router-link>
+
           </div>
           <div class="cart">
             <router-link to="/cart">
@@ -61,6 +63,11 @@ export default {
   padding: 10px 0;
   margin-bottom: 10px;
   box-shadow: 0 1px 5px #F8BBD0;
+  position: fixed;
+  z-index: 4;
+  background: white;
+  right: 0;
+  left: 0;
   //background: rgba(1, 99, 103, 0.1);
 }
 
@@ -84,7 +91,7 @@ export default {
 }
 
 .header__inner {
-  position: fixed;
+
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,6 +1,6 @@
 <template>
   <TheHeader/>
-  <main>
+  <main class="main">
     <div class="container">
       <RouterView/>
     </div>
@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style scoped>
-
+.main {
+  padding-top: 100px;
+}
 </style>

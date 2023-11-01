@@ -23,8 +23,11 @@ export const useSearchStore = defineStore('searchStore', {
         this.searchResult = this.catalog.filter((elem) =>
           elem.title.toLowerCase().includes(val.toLowerCase())
         );
+        // console.log(this.searchResult);
       } else {
         this.searchResult = [];
+        console.log(this.searchResult, 2222);
+        console.log(2313);
       }
     }
   }
