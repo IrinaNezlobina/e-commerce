@@ -1,14 +1,14 @@
 <template>
   <div class="header__search">
     <input
-        v-model="valueSearch"
-        placeholder="Search"
-        type="search"
-        @input="change">
+      v-model="valueSearch"
+      placeholder="Search"
+      type="search"
+      @input="debouncedHandler">
     <div v-if="products.length" :class="{'active':valueSearch}" class="block">
       <div
-          v-for="product in products"
-          class="block-item">
+        v-for="product in products"
+        class="block-item">
         {{ product }}
       </div>
     </div>
@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import {useSearchStore} from "@/stores/SearchStore";
+import { useSearchStore } from "@/stores/SearchStore";
+import { debounce } from "debounce";
 
 export default {
   name: "Search",
@@ -36,11 +37,7 @@ export default {
   },
 
   methods: {
-    /* Custom case */
-    // debounceInput: debounce(() => {
-    //
-    // }, 500),
-    change() {
+    debouncedHandler: debounce(function() {
       if (this.valueSearch) {
         console.log(this.valueSearch);
         this.storeSearch.getSearch(this.valueSearch);
@@ -49,7 +46,7 @@ export default {
         console.log(777)
         document.body.style.overflow = 'auto';
       }
-    },
+    }, 500),
   },
 
   computed: {
