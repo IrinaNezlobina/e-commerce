@@ -1,10 +1,6 @@
 <template>
   <div class="content">
-    <!--    <el-space :size="size" :spacer="spacer">-->
-    <!--      <div v-for="i in 2" :key="i">-->
-    <!--        <button class="btn"> button {{ i }}</button>-->
-    <!--      </div>-->
-    <!--    </el-space>-->
+    <h1 class="page-title">Catalog</h1>
 
 
     <div v-if="data.length" class="products catalog__list">

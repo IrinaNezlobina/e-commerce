@@ -1,23 +1,21 @@
 <template>
   <div class="header__search">
     <input
-      v-model="valueSearch"
-      placeholder="Search"
-      type="search"
-      @input="debouncedHandler">
-    <div v-if="products.length" :class="{'active':valueSearch}" class="block">
-      <div
-        v-for="product in products"
-        class="block-item">
-        {{ product }}
-      </div>
+        v-model="valueSearch"
+        placeholder="Search"
+        type="search"
+        @input="debouncedHandler">
+    <div v-if="products.length" :class="{'active':valueSearch}" class="block catalog__list">
+
+      <product-item v-for="(product, index) in storeSearch.searchResult" :key="index" :item="product"></product-item>
     </div>
   </div>
 </template>
 
 <script>
-import { useSearchStore } from "@/stores/SearchStore";
-import { debounce } from "debounce";
+import {useSearchStore} from "@/stores/SearchStore";
+import {debounce} from "debounce";
+import ProductItem from "@/components/products/ProductItem.vue";
 
 export default {
   name: "Search",
@@ -37,7 +35,7 @@ export default {
   },
 
   methods: {
-    debouncedHandler: debounce(function() {
+    debouncedHandler: debounce(function () {
       if (this.valueSearch) {
         console.log(this.valueSearch);
         this.storeSearch.getSearch(this.valueSearch);
@@ -54,17 +52,27 @@ export default {
       return this.storeSearch.searchResult;
     },
   },
+  components: {
+    ProductItem,
+
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/base/mixins.scss";
+
 .block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   position: fixed;
   top: 85px;
+  @include breakpoint(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include breakpoint(lg) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  padding: 30px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -88,12 +96,13 @@ export default {
 
 .header__search {
   margin-right: 20px;
-  margin-left: auto;
+
 
   input {
     border: unset;
     box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
     padding: 8px 15px;
+    border-radius: 6px;
 
   }
 }

@@ -4,6 +4,9 @@
   <!--</pre>-->
   <div class="catalog content">
     <el-card :body-style="{ padding: '0px' }" class="catalog__item">
+      <vue-feather :class="{'active': favStore.favoriteArr.includes(item)}" class="fav-icon" type="heart"
+                   stroke="#F8BBD0"
+                   @click="favStore.addToFavorite(item)"></vue-feather>
       <router-link
           :to="linkOpen" class="catalog__img">
         <img :src="item.image"/>
@@ -26,8 +29,11 @@
         <div class="catalog__item-rating">
           {{ rating }}
         </div>
-        <button class="btn btn-cart" @click="cartStore.addProduct(item)">Add to cart</button>
-        <button class="btn btn-cart" @click="favStore.addToFavorite(item)">Избранное</button>
+        <button class="btn btn--green btn-cart" @click="cartStore.addProduct(item); this.isFavorite = !this.isFavorite">
+          Add to
+          cart
+        </button>
+
       </div>
     </el-card>
   </div>
@@ -72,6 +78,16 @@ export default {
 
 <style lang="scss">
 @import "@/styles/base/mixins.scss";
+
+.fav-icon {
+  cursor: pointer;
+
+  &.active {
+    svg {
+      fill: #F8BBD0;
+    }
+  }
+}
 
 .catalog__item {
   padding: 20px;
@@ -126,7 +142,7 @@ export default {
 
 .btn-cart {
   margin-top: auto;
-  background: #016367;
+
 
 }
 

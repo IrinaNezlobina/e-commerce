@@ -7,18 +7,25 @@
             <img alt="" src="../assets/images/logo.jpg">
           </router-link>
         </div>
-        <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/products">Products</RouterLink>
+        <nav class="navigation">
+          <RouterLink class="navigation__item" to="/">Home</RouterLink>
+          <RouterLink class="navigation__item" to="/products">Products</RouterLink>
         </nav>
         <Search/>
         <div class="header__right">
           <div class="favorite">
-            <router-link to="/favorite"> fav</router-link>
+            <router-link to="/favorite">
+              <vue-feather type="heart" stroke="#F8BBD0"></vue-feather>
+              <div v-if="favStore.favoriteArr.length" class="fav__counter">
+                {{ favStore.favoriteArr.length }}
+              </div>
+            </router-link>
 
           </div>
           <div class="cart">
             <router-link to="/cart">
+              <vue-feather type="shopping-cart" stroke="#016367"></vue-feather>
+
               <ShoppingCart/>
               <div v-if="cartStore.countProducts" class="cart__counter">
                 {{ cartStore.countProducts }}
@@ -34,15 +41,16 @@
 <script>
 import Search from "@/components/Search";
 import {useCartStore} from "@/stores/CartStore";
+import {useFavStore} from "@/stores/FavoriteStore";
 
 export default {
   name: "TheHeader",
   props: ['search'],
   setup() {
     const cartStore = useCartStore();
-
+    const favStore = useFavStore();
     return {
-      cartStore,
+      cartStore, favStore
     }
   },
 
@@ -75,11 +83,11 @@ export default {
   max-width: 80px;
 }
 
-.cart__counter {
+.cart__counter, .fav__counter {
   position: absolute;
   width: 15px;
   height: 15px;
-  font-size: 12px;
+  font-size: 11px;
   border-radius: 50%;
   color: white;
   background: #016367;
@@ -88,6 +96,10 @@ export default {
   align-items: center;
   top: 0;
   right: -5px;
+}
+
+.fav__counter {
+  background: #F8BBD0;
 }
 
 .header__inner {
@@ -115,15 +127,21 @@ header {
   max-height: 100vh;
 }
 
-nav {
-  font-size: 12px;
+.navigation {
+  margin-inline: auto;
+}
+
+.navigation__item {
+  font-size: 14px;
   text-align: center;
   margin-top: 16px;
+  font-weight: 600;
+
 }
 
 nav a.router-link-exact-active {
   //color: var(--color-text);
-  text-decoration: underline;
+  color: #016367;
 }
 
 nav a.router-link-exact-active:hover {
@@ -139,5 +157,14 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.header__right {
+  display: flex;
+}
+
+.favorite {
+  margin-right: 10px;
+  position: relative;
 }
 </style>
