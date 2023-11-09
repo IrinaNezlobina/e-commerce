@@ -10,16 +10,17 @@
           <div class="cart__title">
             {{ product.title }}
           </div>
-          <div class="">
+          <div class="cart__price">
             {{ (product.price * product.quantity).toFixed(2) }}
           </div>
-          <div class="">
-            Кол-во: {{ product.quantity }}
-          </div>
+
           <div class="buttons">
             <div
                 class="increment"
                 @click="addQty(index)">+
+            </div>
+            <div class="">
+              {{ product.quantity }}
             </div>
             <div
                 class="decrement"
@@ -28,7 +29,8 @@
           </div>
           <div
               class="delete"
-              @click="cartStore.removeProduct(product.id)">x
+              @click="cartStore.removeProduct(product.id)">
+            <vue-feather type="x"></vue-feather>
           </div>
         </div>
 
@@ -92,16 +94,40 @@ export default {
   color: #252525;
 }
 
+.cart__item {
+  display: grid;
+  position: relative;
+  grid-template-columns: 2fr 1fr 1fr;
+
+  & + .cart__item {
+    margin-top: 20px;
+  }
+}
+
+.cart__title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
 .products {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+.cart__price {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .cart {
   &__inner {
     display: grid;
     grid-template-columns: 5fr 2fr;
+    grid-column-gap: 20px;
   }
 
   &__title {
@@ -143,8 +169,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 16px;
-  height: 16px;
+
   position: absolute;
   top: 8px;
   right: 8px;

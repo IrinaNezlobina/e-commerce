@@ -16,4 +16,4 @@ export default defineConfig({
       // styles: resolve('src/assets/scss')
     }
   }
-})
+}
