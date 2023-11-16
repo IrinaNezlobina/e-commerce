@@ -5,11 +5,12 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    // base: env.NODE_ENV === 'production' ? 'prod' : 'dev',
+    base: 'https://irinanezlobina.github.io/e-commerce/',
     plugins: [
         vue(),
     ],
     resolve: {
-        base: '/e-commerce/',
         extensions: ['.js', '.vue', '.json', '.scss'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
