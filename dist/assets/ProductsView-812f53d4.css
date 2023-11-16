@@ -1,0 +1,1 @@
+.catalog__list{display:grid;grid-template-columns:1fr;grid-column-gap:20px;grid-row-gap:20px}@media (min-width: 744px){.catalog__list{grid-template-columns:1fr 1fr}}@media (min-width: 1200px){.catalog__list{grid-template-columns:1fr 1fr 1fr 1fr}}@media (min-width: 1480px){.catalog__list{grid-column-gap:30px;grid-row-gap:30px}}
