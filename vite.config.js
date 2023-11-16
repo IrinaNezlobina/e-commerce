@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
     // base: env.NODE_ENV === 'production' ? 'prod' : 'dev',
-    base: 'https://irinanezlobina.github.io/e-commerce/',
+    base: '/e-commerce/',
     plugins: [
         vue(),
     ],
