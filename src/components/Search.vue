@@ -5,7 +5,8 @@
         placeholder="Search"
         type="search"
         @input="debouncedHandler">
-    <div v-if="products.length" :class="{'active':valueSearch}" class="block catalog__list">
+    <div v-if="products.length" :class="{'active':valueSearch}" class="block catalog__list"
+         v-on:click.stop="valueSearch = null">
 
       <product-item v-for="(product, index) in storeSearch.searchResult" :key="index" :item="product"></product-item>
     </div>
@@ -96,13 +97,25 @@ export default {
 
 .header__search {
   margin-right: 20px;
-
+  order: -2;
+  flex-basis: 100%;
+  padding-top: 12px;
 
   input {
     border: unset;
     box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
     padding: 8px 15px;
     border-radius: 6px;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+
+  }
+
+  @include breakpoint(lg) {
+    padding-top: 0px;
+    flex-basis: unset;
+    order: unset;
 
   }
 }

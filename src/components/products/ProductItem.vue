@@ -4,9 +4,9 @@
   <!--</pre>-->
   <div class="catalog content">
     <el-card :body-style="{ padding: '0px' }" class="catalog__item">
-      <vue-feather :class="{'active': favStore.favoriteArr.includes(item)}" class="fav-icon" type="heart"
-                   stroke="#F8BBD0"
-                   @click="favStore.addToFavorite(item)"></vue-feather>
+      <vue-feather :class="{'active': favStore.favoriteArr.includes(item)}" class="fav-icon" stroke="#F8BBD0"
+                   type="heart"
+                   @click.stop="favStore.addToFavorite(item)"></vue-feather>
       <router-link
           :to="linkOpen" class="catalog__img">
         <img :src="item.image"/>
@@ -29,7 +29,8 @@
         <div class="catalog__item-rating">
           {{ rating }}
         </div>
-        <button class="btn btn--green btn-cart" @click="cartStore.addProduct(item); this.isFavorite = !this.isFavorite">
+        <button class="btn btn--green btn-cart"
+                @click.stop="cartStore.addProduct(item); this.isFavorite = !this.isFavorite">
           Add to
           cart
         </button>

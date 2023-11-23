@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div v-if="data.length" class="products catalog__list">
+    <div v-if="data.length" class="products">
       <!-- Slider main container -->
-      <carousel :autoplay="2000" :wrap-around="true" :items-to-show="1.5">
+      <carousel :autoplay="2000" :breakpoints="breakpoints" :wrap-around="true" v-bind="settings">
         <slide v-for="(item, index) in data" :key="index" :item="item">
           <div class="carousel__item">
             <img :src="item.image"/>
           </div>
         </slide>
-
         <template #addons>
           <pagination/>
         </template>
       </carousel>
     </div>
-
-    <router-link class="btn btn--green" to="/products">In catalog</router-link>
+    <div class="btn-catalog">
+      <router-link class="btn btn--green" to="/products">In catalog</router-link>
+    </div>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
 // import { RouterLink, RouterView } from 'vue-router';
 import {getProducts} from '@/api/products';
 import 'vue3-carousel/dist/carousel.css';
-import {Carousel, Slide, Pagination, Navigation} from 'vue3-carousel';
+import {Carousel, Navigation, Pagination, Slide} from 'vue3-carousel';
 
 export default {
   name: 'HomeView',
@@ -36,6 +36,22 @@ export default {
   data() {
     return {
       data: [],
+      settings: {
+        itemsToShow: 1,
+        snapAlign: 'center',
+      },
+      breakpoints: {
+        // 700px and up
+        700: {
+          itemsToShow: 2,
+          snapAlign: 'center',
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 3,
+          snapAlign: 'start',
+        },
+      }
     }
   },
   methods: {
@@ -58,15 +74,6 @@ export default {
   mounted() {
     this.getData();
   },
-  /* срабатывает тогда, когда компонент инициализируется */
-
-  /* */
-  // created() {
-  // },
-  /* срабатывает тогда, когда компонент проявляется v-if */
-  // activated() {
-  // },
-  /* срабатывает когда уходишь из компонента */
   deactivated() {
   }
 }
@@ -77,6 +84,11 @@ export default {
 
 .product-slide {
   @include ratio50(150, 100)
+}
+
+.btn-catalog {
+  text-align: center;
+  margin-top: 30px;
 }
 
 .carousel__item {

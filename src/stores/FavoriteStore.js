@@ -26,5 +26,8 @@ export const useFavStore = defineStore('favStore', {
                 this.favoriteArr.push(item);
             }
         }
-    }
+    },
+    persist: true
+    
+
 });

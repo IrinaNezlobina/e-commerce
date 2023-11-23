@@ -15,7 +15,7 @@
         <div class="header__right">
           <div class="favorite">
             <router-link to="/favorite">
-              <vue-feather type="heart" stroke="#F8BBD0"></vue-feather>
+              <vue-feather stroke="#F8BBD0" type="heart"></vue-feather>
               <div v-if="favStore.favoriteArr.length" class="fav__counter">
                 {{ favStore.favoriteArr.length }}
               </div>
@@ -24,9 +24,8 @@
           </div>
           <div class="cart">
             <router-link to="/cart">
-              <vue-feather type="shopping-cart" stroke="#016367"></vue-feather>
+              <vue-feather stroke="#016367" type="shopping-cart"></vue-feather>
 
-              <ShoppingCart/>
               <div v-if="cartStore.countProducts" class="cart__counter">
                 {{ cartStore.countProducts }}
               </div>
@@ -40,6 +39,7 @@
 
 <script>
 import Search from "@/components/Search";
+
 import {useCartStore} from "@/stores/CartStore";
 import {useFavStore} from "@/stores/FavoriteStore";
 
@@ -103,9 +103,9 @@ export default {
 }
 
 .header__inner {
-
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   @include breakpoint(lg) {
     position: relative;

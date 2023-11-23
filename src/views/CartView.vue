@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div v-if="cartStore.cart.length" class="cart">
     <h1 class="page-title">Cart</h1>
     <div class="cart__inner">
       <div class="cart__list">
@@ -13,13 +13,12 @@
           <div class="cart__price">
             {{ (product.price * product.quantity).toFixed(2) }}
           </div>
-
-          <div class="buttons">
+          <div class="counter">
             <div
                 class="increment"
                 @click="addQty(index)">+
             </div>
-            <div class="">
+            <div class="counter-quantity">
               {{ product.quantity }}
             </div>
             <div
@@ -33,16 +32,18 @@
             <vue-feather type="x"></vue-feather>
           </div>
         </div>
-
       </div>
-
       <div class="cart__total-container">
         <div class="cart__total">
           Total price {{ total.toFixed(2) }}
         </div>
-
       </div>
     </div>
+  </div>
+  <div v-else class="cart-empty">
+    <h1>
+      Your cart is Empty
+    </h1>
   </div>
 </template>
 
@@ -81,7 +82,6 @@ export default {
       this.cartStore.cart.map((item) => {
         total = total + (item.quantity * item.price);
       })
-
       return total;
     },
   }
@@ -89,15 +89,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/base/mixins.scss";
+
 .cart {
-  padding: 25px;
+  margin-bottom: 50px;
+  @include breakpoint(lg) {
+    padding: 25px;
+  }
   color: #252525;
+}
+
+.cart-empty {
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }
 
 .cart__item {
   display: grid;
   position: relative;
   grid-template-columns: 2fr 1fr 1fr;
+  padding: 20px 10px;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
 
   & + .cart__item {
     margin-top: 20px;
@@ -125,9 +140,11 @@ export default {
 
 .cart {
   &__inner {
-    display: grid;
-    grid-template-columns: 5fr 2fr;
-    grid-column-gap: 20px;
+    @include breakpoint(lg) {
+      display: grid;
+      grid-template-columns: 5fr 2fr;
+      grid-column-gap: 20px;
+    }
   }
 
   &__title {
@@ -145,33 +162,40 @@ export default {
   top: 0;
 }
 
-.buttons {
+.counter {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   min-width: 50px;
   color: #252525;
-  gap: 16px;
   font-size: 18px;
 
-  > div {
+  .increment, .decrement {
     display: flex;
+    background: #016367;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
     width: 36px;
     height: 36px;
-    background: #fff;
+    color: #fff;
     cursor: pointer;
   }
+}
+
+.counter-quantity {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .delete {
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: absolute;
-  top: 8px;
+  top: 10px;
   right: 8px;
   cursor: pointer;
 }

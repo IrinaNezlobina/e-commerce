@@ -25,9 +25,7 @@ export default {
   },
 
   data() {
-    return {
-      str: '123',
-    }
+    return {}
   },
 
   methods: {},
@@ -45,8 +43,5 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  padding-top: 100px;
-  padding-bottom: 50px;
-}
+
 </style>
