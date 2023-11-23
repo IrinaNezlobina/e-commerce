@@ -1,13 +1,8 @@
 <template>
   <div class="content">
-    <Search :search="getSearch" />
-    <el-space :size="size" :spacer="spacer">
-      <div v-for="i in 2" :key="i">
-        <button class="btn"> button {{ i }} </button>
-      </div>
+    <h1 class="page-title">Catalog</h1>
 
-    </el-space>
-    <div :data="searchResult" ></div>
+
     <div v-if="data.length" class="products catalog__list">
       <product-item v-for="(item, index) in data" :key="index" :item="item"></product-item>
     </div>
@@ -19,7 +14,6 @@
 <script>
 import {getProducts} from '@/api/products';
 import ProductItem from "@/components/products/ProductItem.vue";
-import Search from "@/components/Search";
 
 export default {
   name: 'ProductView',
@@ -28,7 +22,7 @@ export default {
     return {
       data: [],
       loading: true,
-      searchResult:[]
+      searchResult: [],
     }
   },
   methods: {
@@ -46,15 +40,13 @@ export default {
       }
     },
 
-    getSearch(val) {
-      this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
-    }
+
   },
   computed() {
   },
   components: {
     ProductItem,
-    Search
+
   },
   mounted() {
     this.getData();
@@ -64,13 +56,31 @@ export default {
 
 
 <style lang="scss">
-.catalog__list {
-  //@include breakpoint(lg) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-  //}
+@import "@/styles/base/mixins.scss";
 
+.catalog__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  @include breakpoint(md) {
+
+    grid-template-columns: 1fr 1fr;
+
+
+  }
+  @include breakpoint(lg) {
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+
+  }
+  @include breakpoint(xl) {
+
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+
+
+  }
 }
 </style>

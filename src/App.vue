@@ -1,34 +1,39 @@
 <template>
-<TheHeader :search="getSearch" />
-  <main>
+  <TheHeader/>
+  <main class="main">
     <div class="container">
-      <RouterView />
+      <RouterView/>
     </div>
   </main>
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
+import {RouterView} from 'vue-router';
 import TheHeader from "@/components/TheHeader";
+import "@/styles/base/mixins.scss";
+import {useSearchStore} from "@/stores/SearchStore";
 
 export default {
   name: 'App',
 
-  setup() {},
+  setup() {
+    const searchStore = useSearchStore();
 
-  data() {
     return {
-      str: '123',
+      searchStore,
     }
   },
 
-  methods: {
-    getSearch(val) {
-      this.searchResult = this.catalog.filter((elem) => elem.title.toLowerCase().includes(val.toLowerCase()));
-    },
+  data() {
+    return {}
   },
 
-  computed() {},
+  methods: {},
+  mounted() {
+    this.searchStore.getSearchProducts();
+  },
+  computed() {
+  },
 
   components: {
     RouterView,

@@ -32,6 +32,11 @@ body b {
   color: inherit;
 }
 
+.main {
+  padding-top: 150px;
+  padding-bottom: 80px;
+}
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -144,9 +149,9 @@ main {
   height: 100%;
   max-width: 1280px;
   box-sizing: border-box;
-
+  padding: 0 20px;
   @include breakpoint(lg) {
-    padding: 0;
+    padding: 0 30px;
   }
 }
 
@@ -172,5 +177,37 @@ button {
   @include breakpoint(lg) {
     transition: 0.4s;
     cursor: pointer;
+  }
+}
+
+.btn--green {
+  background: #016367;
+  transition: .5s;
+
+  &:hover {
+    background: transparent;
+    color: #016367;
+  }
+}
+
+.page-title {
+  color: #252525;
+  font-weight: 500;
+}
+
+.catalog__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  @include breakpoint(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include breakpoint(lg) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @include breakpoint(xl) {
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
   }
 }

@@ -1,7 +1,6 @@
 <template>
-Page not found
+  Page not found
 </template>
-
 <script>
 export default {
   name: "PageNotFound"

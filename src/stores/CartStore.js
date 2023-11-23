@@ -1,20 +1,21 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
-       cart: [],
+        cart: [],
+
     }),
 
     /* return значение, которое нам нужно */
     getters: {
         countProducts() {
-          let total = 0;
+            let total = 0;
 
-          this.cart.map((item) => {
-              total = total + item.quantity;
-          });
+            this.cart.map((item) => {
+                total = total + item.quantity;
+            });
 
-          return total;
+            return total;
         },
     },
 
@@ -48,8 +49,8 @@ export const useCartStore = defineStore('cartStore', {
         removeProduct(id) {
             const product = this.cart.find(item => item.id === id);
             const index = this.cart.indexOf(product);
-
             this.cart.splice(index, 1);
         },
-    }
+    },
+    persist: true
 });
